@@ -1,0 +1,13 @@
+{
+    "properties": [
+        {
+            "name": "nodered-v2-runtime",
+            "value": "1"
+        },
+	{
+            "name": "nodered-v2-deployment",
+            "value": "0"
+        }
+    ],
+    "constraints": []
+}

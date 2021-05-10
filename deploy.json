@@ -1,0 +1,8 @@
+{
+        "DEPLOY_ID": "default",
+        "DEPLOY_DESCRIPTION": "DEFAULT DEPLOY",
+        "DEPLOY_OWNER": "docker image",
+        "DEPLOY_PRESERVELOCAL": "false",
+        "DEPLOY_FLOWS": "flows.json",
+        "DEPLOY_CREDENTIALS": "flows_cred.json"
+}
