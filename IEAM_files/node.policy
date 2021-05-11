@@ -1,0 +1,7 @@
+{
+"properties": [		
+  { "name": "nodered-app", "value": "1" },
+  { "name": "nodered-app-deployment", "value": "edgenode01" }
+  ],
+"constraints": []
+}

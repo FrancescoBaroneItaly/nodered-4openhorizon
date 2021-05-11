@@ -1,8 +1,0 @@
-{
-    "HZN_ORG_ID": "wwsc",
-    "MetadataVars": {
-        "DOCKER_IMAGE_BASE": "us.icr.io/ibm-edgelab/nodered-v2",
-        "SERVICE_NAME": "nodered-v2",
-        "SERVICE_VERSION": "2.0.5"
-    }
-}
