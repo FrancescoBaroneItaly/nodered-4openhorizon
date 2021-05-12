@@ -17,7 +17,7 @@
 		
       git clone https://github.com/FrancescoBaroneItaly/nodered-4openhorizon.git
 	  
-	  cd nodered-5openhorizon
+	  cd nodered-4openhorizon
 	  
 	  *I used the IBMCLOUD container registry to store the image
 	  
@@ -51,6 +51,12 @@
 				"label": "Define the type of service",
 				"type": "string",
 				"defaultValue": "nodered"
+				},
+				{
+				"name": "SERVICE_NAME",
+				"label": "Service Name required during workflow deployment",
+				"type": "string",
+				"defaultValue": "$SERVICE_NAME"
 				}
 			],
 			"deployment": {
@@ -71,11 +77,12 @@
 	  
 	      eval $(hzn util configconv -f horizon/hzn.json)
 
-	      docker build -t "${DOCKER_IMAGE_BASE}_$ARCH:$SERVICE_VERSION" .
+	      docker build --rm=true -t "us.icr.io/$REGISTRY_NAMESPACE/${BASE_IMAGE_NAME}_$ARCH:$SERVICE_VERSION" .
 		  
 	  If build succefully, publish service to IEAM catalog
 	  
-	     hzn exchange service publish -f horizon/service.definition.json
+	     hzn exchange service publish -r "us.icr.io:iamapikey:$CLOUD_API_KEY" -f horizon/service.definition.json
+
 
 	  
 ## Create a Deployment service policy
@@ -103,7 +110,7 @@
 		  "nodeHealth": {}
 		},
 		"constraints": [
-		  "nodered-app == 1"
+		  "nodered-app-runtime == 1"
 		],
 		"userInput": [
 		  {
@@ -124,8 +131,8 @@
   
      {
 		"properties": [		
-		{ "name": "nodered-app", "value": "1" },
-		{ "name": "nodered-app-deployment", "value": "edgenode01" }
+		{ "name": "nodered-app-runtime", "value": "1" },
+		{ "name": "nodered-deployment", "value": "edgenode01" }
 		],
 		"constraints": []
 	 }
@@ -139,28 +146,6 @@
   
   Create the following JSON File from template
   
-	  {
-	  "objectID": "edgenode01.nodered-app-deployment",
-	  "objectType": "deploy.tar",
-	  "destinationOrgID": "$HZN_ORG_ID",
-	  "destinationPolicy": {
-		"properties": [],
-		"constraints": [
-			"edgenode_id == edgenode01"
-			],
-		"services": [
-		  {
-			"orgID": "$HZN_ORG_ID",
-			"arch": "$ARCH",
-			"serviceName": "$SERVICE_NAME",
-			"version": "$SERVICE_VERSION"
-		  }
-		]
-	  },
-	  "version": "2",
-	  "description": "workflow",
-	  "expiration": "",
-	  "activationTime": ""
-	}
+	  
 
 ## Check at Edge Node (optional)

@@ -108,7 +108,7 @@ DEPLOY_ID="---"
 DEPLOY_TYPE="---"
 
 # The type and name of the MMS file we are using
-OBJECT_ID="$HZN_DEVICE_ID.nodered-v2-deployment"
+OBJECT_ID="$HZN_DEVICE_ID.$SERVICE_NAME-deployment"
 OBJECT_TYPE="deploy.tar"
 OBJECT_RECEIVED=0
 
