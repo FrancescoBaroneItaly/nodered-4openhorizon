@@ -19,7 +19,7 @@
   "nodeHealth": {}
 },
 "constraints": [
-  "nodered-app == 1"
+  "nodered-app-runtime == 1"
 ],
 "userInput": [
   {

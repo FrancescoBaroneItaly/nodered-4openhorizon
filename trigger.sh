@@ -316,6 +316,9 @@ while true; do
 			cp "${TEMP}/settings.js" "$DATA/"
 			fi
 
+        if [[ $DEBUG == 1 ]]; then echo "DEBUG: FIX FILES PERMISSION V1.0"; fi
+	ls ${TEMP} | grep -v settings.js | grep -v flows.json | grep -v flows_cred.json | while read f;do chmod -R 755 $f;done
+
         if [[ $DEBUG == 1 ]]; then echo "DEBUG: CLEAN EXISTING FLOWS and CREDENTIALS"; fi
         rm $DATA/flows.json
         rm $DATA/flows_cred.json
