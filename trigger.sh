@@ -181,8 +181,9 @@ while true; do
 		LTIME2=$ATIME2
 		
 		if [[ $DEBUG == 1 ]]; then echo "DEBUG: WORKFLOW FILE CHANGE"; fi
-		
-		DEPLOY_TARGET_HOST=$(ip route|awk '/default/ { print $3 }')
+	
+	 	#FIX 25.05.2021 set by deploy.json	
+		#DEPLOY_TARGET_HOST=$(ip route|awk '/default/ { print $3 }')
 		
 		echo $DEPLOY_INITIAL | base64 -d > deployment.json
 		
@@ -217,7 +218,7 @@ while true; do
 			if [[ $DEBUG == 1 ]]; then echo "DEBUG: UPLOAD OBJECT TO http://$DEPLOY_TARGET_HOST:$DEPLOY_TARGET_PORT/nodered-upload_deployment/$DEPLOY_TARGET_LINK/data"; fi
 			#new_mms=$(echo $new_json | base64 -w 0)
 			 
-			HTTP_CODE=$(curl -sSLw "%{http_code}" -i -H "Accept: application/json" -H "Content-Type:application/json" -X PUT --data @<(echo $new_json) http://$DEPLOY_TARGET_HOST:$DEPLOY_TARGET_PORT/nodered-upload_deployment/$DEPLOY_TARGET_LINK/data)
+			HTTP_CODE=$(curl -sSLw "%{http_code}" -i -H "Accept: application/json" -H "Content-Type:application/json" -H "Cache-Control: no-cache" -X PUT --data @<(echo $new_json) http://$DEPLOY_TARGET_HOST:$DEPLOY_TARGET_PORT/nodered-upload_deployment/$DEPLOY_TARGET_LINK/data)
 			if [[ "$HTTP_CODE" != '200' && "$HTTP_CODE" != '404' ]]; then echo "Error: HTTP code $HTTP_CODE from: curl -sSLw "%{http_code}" -X PUT -d ... http://$DEPLOY_TARGET_HOST:DEPLOY_TARGET_PORT/nodered-upload_deployment/$DEPLOY_TARGET_LINK/data"; fi
 			if [[ $DEBUG == 1 ]]; then echo "DEBUG: RC $HTTP_CODE"; fi		
 			
